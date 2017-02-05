@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import CommentList from './CommentList'
 
 export default class Article extends Component {
     state = {
@@ -15,7 +16,6 @@ export default class Article extends Component {
 
     render() {
         const {article} = this.props
-        console.log('---', 123)
         return (
             <div>
                 <h3 onClick={this.handleClick}>{article.title}</h3>
@@ -30,9 +30,17 @@ export default class Article extends Component {
         return (
             <section>
                 {this.props.article.text}
+	            {this.getComments()}
             </section>
         )
     }
+
+	getComments() {
+		const {comments} = this.props.article;
+		return (
+			<CommentList comments={comments}/>
+		)
+	}
 
     handleClick = (ev) => {
         this.setState({
