@@ -36,6 +36,7 @@ export default class CommentList extends Component {
 		);
 	}
 
+	//вряд ли от этого метода будет много пользы. Лучше сделай отдельно getShowHideText
 	getPhrase(phrase_id) {
 		return this.state.isOpen ? phrases[phrase_id + "_opened"] : phrases[phrase_id];
 	}
