@@ -30,6 +30,7 @@ export default class Article extends Component {
         return (
             <section>
                 {this.props.article.text}
+		{/*Вот с этим перемудрил, надо было просто <CommentList/> здесь написать*/}
 	            {this.getComments()}
             </section>
         )
