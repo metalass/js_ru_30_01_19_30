@@ -8,6 +8,7 @@ class ArticleList extends Component {
 		articles: PropTypes.array.isRequired,
 
 		// Не знаю, нужно ли это указывать, т.к. декоратор можно убрать и тогда ошибки повалятся, но с другой стороны проверять в декораторе нет возможности, а проверять возможно нужно
+		//стоит - уберешь декоратор, ошики повалятся не просто так - надо будет как-то по другому передавать
 		openArticleId: PropTypes.string,
 		toggleOpen: PropTypes.func
 	}
