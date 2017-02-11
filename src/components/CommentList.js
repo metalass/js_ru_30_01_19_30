@@ -1,9 +1,11 @@
 import React, { Component, PropTypes } from 'react'
 import Comment from './Comment'
+import CommentNew from './CommentNew'
 
 class CommentList extends Component {
     static propTypes = {
-        comments: PropTypes.array
+        comments: PropTypes.array,
+	    articleId: PropTypes.string.isRequired
     }
     static defaultProps = {
         comments: []
@@ -26,11 +28,14 @@ class CommentList extends Component {
     }
 
     render() {
-        const actionText = this.state.isOpen ? 'hide' : 'show'
+        const actionText = this.state.isOpen ? 'hide' : 'show',
+	        { articleId } = this.props
+
         return (
             <div>
                 <a href="#" onClick={this.toggleOpen}>{actionText} comments</a>
                 {this.getBody()}
+                <CommentNew articleId={articleId}/>
             </div>
         )
     }
