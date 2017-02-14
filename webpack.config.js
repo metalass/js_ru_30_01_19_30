@@ -1,4 +1,5 @@
 var path = require('path')
+var LiveReloadPlugin = require('webpack-livereload-plugin');
 
 module.exports = {
     devtool: 'source-map',
@@ -22,5 +23,10 @@ module.exports = {
                 loaders: [ 'style-loader', 'css-loader' ]
             }
         ]
-    }
+    },
+
+	watch: true,
+	plugins: [
+		new LiveReloadPlugin()
+	]
 }

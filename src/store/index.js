@@ -13,7 +13,12 @@ const enhancer = composeEnhancers(
     applyMiddleware(logger)
 )
 
-const store = createStore(reducer, {}, enhancer)
+const store = createStore(reducer, {
+	range: {
+		from: null,
+		to: null
+	}
+}, enhancer)
 
 //dev only
 window.store = store
