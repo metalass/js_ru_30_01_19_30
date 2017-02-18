@@ -1,16 +1,30 @@
-import {normalizedArticles as defaultArticles} from '../fixtures'
-import {DELETE_ARTICLE} from '../constants'
+import {DELETE_ARTICLE, LOAD_ALL_ARTICLES, FAIL, SUCCESS, START} from '../constants'
 import {arrayToMap} from '../utils'
 
-const defaultState = arrayToMap(defaultArticles)
+const defaultState = {
+    isLoading: false,
+    entities: arrayToMap([])
+}
 
-export default (articles = defaultState, action) => {
+
+export default (state = defaultState, action) => {
     const {type, payload} = action
 
     switch (type) {
         case DELETE_ARTICLE:
-            return articles.filter(article => article.id !== payload.id)
+            //todo fix me
+            return state.filter(article => article.id !== payload.id)
+
+        case LOAD_ALL_ARTICLES + START:
+            return {...state, isLoading: true}
+
+        case LOAD_ALL_ARTICLES + SUCCESS:
+            return {
+                ...state,
+                entities: arrayToMap(action.response),
+                isLoading: false
+            }
     }
 
-    return articles
+    return state
 }
