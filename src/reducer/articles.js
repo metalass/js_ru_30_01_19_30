@@ -1,5 +1,5 @@
-import {DELETE_ARTICLE, LOAD_ALL_ARTICLES, FAIL, SUCCESS, START} from '../constants'
-import {arrayToMap} from '../utils'
+import {DELETE_ARTICLE, LOAD_ALL_ARTICLES, FAIL, SUCCESS, START, ADD_COMMENT} from '../constants'
+import {arrayToMap, mapToArr} from '../utils'
 
 const defaultState = {
     isLoading: false,
@@ -12,8 +12,8 @@ export default (state = defaultState, action) => {
 
     switch (type) {
         case DELETE_ARTICLE:
-            //todo fix me
-            return state.filter(article => article.id !== payload.id)
+            // вроде корявенько, но как иначе, не знаю, туплю что-то ))
+	        return {...state, entities: arrayToMap(mapToArr(state.entities).filter(article => article.id != payload.id))}
 
         case LOAD_ALL_ARTICLES + START:
             return {...state, isLoading: true}
@@ -24,6 +24,12 @@ export default (state = defaultState, action) => {
                 entities: arrayToMap(action.response),
                 isLoading: false
             }
+
+		case ADD_COMMENT:
+			// правильно ли я тут поступаю. Поскольку состояние нужно не менять, а передавать новое, я клонирую объект состояния и вношу в него изменения. Просто как это завернуть в одну строчку, я как-то не догадался
+			let newState = {...state};
+			newState.entities[ payload.articleid ]["comments"].push(payload.commentid);
+			return newState
     }
 
     return state

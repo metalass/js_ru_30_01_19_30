@@ -53,19 +53,20 @@ class Article extends Component {
     }
 
     getBody() {
-        const {isOpen, article: {text, comments}} = this.props
+        const {isOpen, article: {text, comments, id}} = this.props
         if (!isOpen) return null
 
         return (
             <section>
                 {text}
-                <CommentList comments={comments} ref = {this.getCommentsRef} />
+                <CommentList articleid={id} comments={comments} ref = {this.getCommentsRef} />
             </section>
         )
     }
 
     handleDelete = ev => {
         ev.preventDefault()
+	    ev.stopPropagation && ev.stopPropagation()
         this.props.deleteArticle(this.props.article.id)
     }
 }
