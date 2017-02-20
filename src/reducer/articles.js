@@ -29,9 +29,10 @@ export default (state = defaultState, action) => {
 		case ADD_COMMENT:
 			// правильно ли я тут поступаю. Поскольку состояние нужно не менять, а передавать новое, я клонирую объект состояния и вношу в него изменения. Просто как это завернуть в одну строчку, я как-то не догадался
 		    	//Ты правильно понял, так не очень хорошо, стоит делать кучу спредов. Хочеш такого избежать - прийдется использовать immutable.js или аналог
-			let newState = {...state};
-			newState.entities[ payload.articleid ]["comments"].push(payload.commentid);
-			return newState
+			//let newState = {...state};
+			//newState.entities[ payload.articleid ]["comments"].push(payload.commentid);
+			// Т.е. это можно заменить на такой архи-адский спрэд. Но все же мне не понятно, почему изначальное не очень хорошо. Изначальный вариант мне кажется более прозрачным. И мы ведь все равно создаем новый объект, так какая разница, создаем мы его одной строкой через литерал с использованием спрэдов, или поэтапно?
+			return {...state, entities: {...state.entities, [payload.articleid]: {...state.entities[payload.articleid], comments: [...state.entities[payload.articleid].comments, payload.commentid]}}}
     }
 
     return state
