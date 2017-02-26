@@ -1,4 +1,4 @@
-import {INCREMENT, DELETE_ARTICLE, CHANGE_DATE_RANGE, CHANGE_SELECTION, LOAD_ALL_ARTICLES, ADD_COMMENT, LOAD_ARTICLE,
+import {INCREMENT, DELETE_ARTICLE, CHANGE_DATE_RANGE, CHANGE_SELECTION, LOAD_ALL_ARTICLES, ADD_COMMENT, LOAD_ARTICLE, LOAD_COMMENTS,
     START, SUCCESS, FAIL} from '../constants'
 import $ from 'jquery'
 
@@ -73,4 +73,12 @@ export function loadArticle(id) {
         payload: { id },
         callAPI: `/api/article/${id}`
     }
+}
+
+export function loadComments(id) {
+	return {
+		type: LOAD_COMMENTS,
+		payload: { id },
+		callAPI: `/api/comment?article=${id}`
+	}
 }

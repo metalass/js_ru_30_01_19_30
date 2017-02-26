@@ -1,6 +1,10 @@
 import React, { Component, PropTypes } from 'react'
 import Comment from './Comment'
 import NewCommentForm from './NewCommentForm'
+import {connect} from 'react-redux'
+import Loader from './Loader'
+import { loadComments } from '../AC'
+import {mapToArr} from '../utils'
 
 class CommentList extends Component {
     static propTypes = {
@@ -22,20 +26,29 @@ class CommentList extends Component {
     }
 
     getBody() {
-        if (!this.state.isOpen) return null
+	    const comments = this.props.comments && this.props.comments.get(this.props.articleId);
+        if (!this.state.isOpen || !this.props.comments || !comments) return null
+	    if (!comments.isLoaded) return <Loader />
 
-        const {comments = [], id} = this.props.article
-        if (!comments.length) return (<div>
+	    const commentsList = mapToArr(comments.entities),
+		    id = this.props.articleId;
+
+        if (!commentsList.length) return (<div>
             <h3>No comments yet</h3>
             <NewCommentForm articleId={id}/>
         </div>)
 
-        const commentItems = comments.map(id => <li key={id}><Comment id={id} /></li>)
+        const commentItems = commentsList.map(comment => <li key={comment.id}><Comment comment={comment} /></li>)
         return <div>
             <ul>{commentItems}</ul>
             <NewCommentForm articleId={id} />
         </div>
     }
+
+	componentWillUpdate(nextProps, nextState) {
+		const comments = nextProps.comments && nextProps.comments.get(this.props.articleId);
+		if (nextState.isOpen && (!comments || (!comments.isLoading && !comments.isLoaded))) this.props.loadComments(this.props.articleId)
+	}
 
     toggleOpen = ev => {
         ev.preventDefault()
@@ -45,4 +58,11 @@ class CommentList extends Component {
     }
 }
 
-export default CommentList
+export default connect(
+	(state) => {
+		return {
+			comments: state.comments
+		}
+	},
+	{ loadComments }
+)(CommentList)

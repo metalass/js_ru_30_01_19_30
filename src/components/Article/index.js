@@ -66,7 +66,7 @@ class Article extends Component {
         return (
             <section>
                 {article.text}
-                <CommentList article={article} ref = {this.getCommentsRef} />
+                <CommentList article={article} articleId={article.id} ref = {this.getCommentsRef} />
             </section>
         )
     }

@@ -31,8 +31,8 @@ export default (state = defaultState, action) => {
                 .set('isLoading', false)
                 .set('entities', arrayToMap(response, ArticleModel))
 
-        case ADD_COMMENT:
-            return state.updateIn(['entities', payload.articleId, 'comments'], comments => comments.concat(randomId))
+        //case ADD_COMMENT:
+        //    return state.updateIn(['entities', payload.articleId, 'comments'], comments => comments.concat(randomId))
 
         case LOAD_ARTICLE + START:
             return state.setIn(['entities', payload.id, 'isLoading'], true)
