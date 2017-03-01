@@ -60,3 +60,5 @@ class CommentList extends Component {
 }
 
 export default connect(null, {loadArticleComments})(CommentList)
+
+

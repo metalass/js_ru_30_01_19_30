@@ -4,6 +4,7 @@ import Root from './components/Root'
 import ArticleList from './routeHandlers/ArticleList'
 import Filters from './routeHandlers/Filters'
 import Counter from './routeHandlers/Counter'
+import Comments from './routeHandlers/Comments'
 import ArticlePage from './routeHandlers/ArticlePage'
 import NotFoundPage from './routeHandlers/NotFoundPage'
 import AuthorizedOnlyPage from './routeHandlers/AuthorizedOnlyPage'
@@ -18,6 +19,9 @@ export default (
             </Route>
             <Route path="filters" component={Filters}/>
             <Route path="counter" component={Counter}/>
+	        <Route path="comments" component={Comments}>
+		        <Route path=":page" />
+	        </Route>
             <Route path="admin" component={AuthorizedOnlyPage}
                 onEnter={(routeState, replace) => {
                     if (!store.getState().user) {

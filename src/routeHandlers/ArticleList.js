@@ -2,16 +2,16 @@ import React, { Component, PropTypes } from 'react'
 import ArticleList from '../components/ArticleList'
 
 class ArticleListPage extends Component {
-    static propTypes = {
+	static propTypes = {
 
-    };
+	};
 
-    render() {
-        return <div>
-            <ArticleList />
+	render() {
+		return <div>
+			<ArticleList />
             {this.props.children}
-        </div>
-    }
+		</div>
+	}
 }
 
 export default ArticleListPage
