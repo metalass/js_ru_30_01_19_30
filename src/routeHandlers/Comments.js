@@ -11,6 +11,7 @@ class CommentsListPage extends Component {
 		const { page } = this.props.params,
 			perPage = 5;
 		if (!page) {
+			//не делай такого в render(), он должен быть чистой функцией
 			browserHistory.replace(`/comments/1`);
 			return null;
 		} else {
