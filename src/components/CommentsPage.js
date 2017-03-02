@@ -13,7 +13,7 @@ class CommentsPage extends Component {
 		const comments = this.getCommentsArray();
 		if (!comments || !comments.length) loadCommentsPage(perPage, (page - 1) * perPage);
 	}
-
+	//лучше в connect вынести
 	getCommentsArray() {
 		//return []; так можно сымитировать отсутствие комментариев и проверить, что все нормально выводится
 		const {comments, loading, page, perPage} = this.props
@@ -31,6 +31,7 @@ class CommentsPage extends Component {
 
 		if (loaded && !comments.length && page != 1) {
 			// Несуществующая страница
+			//и снова не в render()
 			browserHistory.replace(`/comments/1`);
 		}
 		if (loaded && !comments.length && page == 1) {
