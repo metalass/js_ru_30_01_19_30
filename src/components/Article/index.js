@@ -18,12 +18,17 @@ class Article extends Component {
         isOpen: PropTypes.bool,
         toggleOpen: PropTypes.func
     }
-/*
 
-    shouldComponentUpdate(nextProps, nextState) {
-        return nextProps.isOpen !== this.props.isOpen
-    }
-*/
+	static contextTypes = {
+		msg: PropTypes.object
+	}
+
+	/*
+
+		shouldComponentUpdate(nextProps, nextState) {
+			return nextProps.isOpen !== this.props.isOpen
+		}
+	*/
 
     componentDidMount() {
         const { article, id, loadArticle } = this.props
@@ -37,7 +42,7 @@ class Article extends Component {
             <div ref = {this.getContainerRef}>
                 <h3 onClick={toggleOpen}>
                     {article.title}
-                    <a href="#" onClick = {this.handleDelete}>Delete me</a>
+                    <a href="#" onClick = {this.handleDelete}>{this.context.msg.DELETE_ME}</a>
                 </h3>
                 <CSSTransition
                     transitionName="article-body"

@@ -20,6 +20,7 @@ class SelectFilter extends Component {
             value: article.id
         }))
 
+	    // TODO как локализовать селект я слету не смог понять.
         return <Select
             options={options}
             value={selected}

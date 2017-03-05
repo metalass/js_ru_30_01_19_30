@@ -12,6 +12,10 @@ class NewCommentForm extends Component {
         user: ''
     }
 
+	static contextTypes = {
+		msg: PropTypes.object
+	}
+
     handleChange = field => ev => {
         this.setState({
             [field]: ev.target.value
@@ -31,12 +35,12 @@ class NewCommentForm extends Component {
     render() {
         return (
             <form onSubmit = {this.handleSubmit}>
-                comment: <input type="text" value={this.state.text} onChange = {this.handleChange('text')}/>
-                user: <input type="text" value={this.state.user} onChange = {this.handleChange('user')}/>
+                {this.context.msg.FORM_COMMENT}: <input type="text" value={this.state.text} onChange = {this.handleChange('text')}/>
+                {this.context.msg.FORM_USER}: <input type="text" value={this.state.user} onChange = {this.handleChange('user')}/>
                 <input type = "submit"/>
             </form>
         )
     }
 }
 
-export default connect(null, {addComment})(NewCommentForm)
+export default connect(null, {addComment}, null, {pure: false})(NewCommentForm)

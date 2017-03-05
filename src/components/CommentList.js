@@ -13,7 +13,8 @@ class CommentList extends Component {
     static contextTypes = {
         router: PropTypes.object,
         store: PropTypes.object,
-        user: PropTypes.string
+        user: PropTypes.string,
+	    msg: PropTypes.object
     }
 
     state = {
@@ -27,10 +28,10 @@ class CommentList extends Component {
     }
 
     render() {
-        const actionText = this.state.isOpen ? 'hide' : 'show'
+        const actionText = this.state.isOpen ? this.context.msg.HIDE_COMMENTS : this.context.msg.SHOW_COMMENTS
         return (
             <div>
-                <a href="#" onClick={this.toggleOpen}>{actionText} comments</a>
+                <a href="#" onClick={this.toggleOpen}>{actionText}</a>
                 {this.getBody()}
             </div>
         )
@@ -46,13 +47,13 @@ class CommentList extends Component {
         }
 
         if (!comments.length) return (<div>
-            <h3>No comments yet</h3>
+            <h3>{this.context.msg.NO_COMMENTS}</h3>
             <NewCommentForm articleId={id}/>
         </div>)
 
         const commentItems = comments.map(id => <li key={id}><Comment id={id} /></li>)
         return <div>
-            Username: {this.context.user}
+            {this.context.msg.USERNAME}: {this.context.user}
             <ul>{commentItems}</ul>
             <NewCommentForm articleId={id} />
         </div>

@@ -24,4 +24,4 @@ class Filters extends Component {
 
 export default connect(state => ({
     articles: state.articles.entities
-}), {loadAllArticles})(Filters)
+}), {loadAllArticles}, null, {pure: false})(Filters)

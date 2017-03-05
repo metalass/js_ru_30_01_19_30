@@ -7,11 +7,15 @@ class Counter extends Component {
 
     };
 
+	static contextTypes = {
+		msg: PropTypes.object
+	}
+
     render() {
         return (
             <div>
                 <h1>{this.props.count}</h1>
-                <a href="#" onClick={this.handleIncrement}>Increment</a>
+                <a href="#" onClick={this.handleIncrement}>{this.context.msg.INCREMENT}</a>
             </div>
         )
     }
@@ -26,4 +30,4 @@ export default connect((state) => {
     return {
         count: state.count
     }
-}, { increment })(Counter)
+}, { increment }, null, {pure: false})(Counter)

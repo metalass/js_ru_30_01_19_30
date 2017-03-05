@@ -5,10 +5,14 @@ class ErrorPage extends Component {
 
     };
 
+	static contextTypes = {
+		msg: PropTypes.object
+	}
+
     render() {
         return (
             <div>
-                <h1>Error: {this.props.location.query.message}</h1>
+                <h1>{this.context.msg.ERROR}: {this.props.location.query.message}</h1>
             </div>
         )
     }

@@ -5,10 +5,14 @@ class ArticleIndexPage extends Component {
 
     };
 
+	static contextTypes = {
+		msg: PropTypes.object
+	}
+
     render() {
         return (
             <div>
-                <h1>Select Article</h1>
+                <h1>{this.context.msg.H1_ARTICLE}</h1>
             </div>
         )
     }

@@ -5,10 +5,14 @@ class NotFoundPage extends Component {
 
     };
 
+	static contextTypes = {
+		msg: PropTypes.object
+	}
+
     render() {
         return (
             <div>
-                <h1>sorry, page not found</h1>
+                <h1>{this.context.msg.ERROR_PAGE_NOT_FOUND}</h1>
             </div>
         )
     }
