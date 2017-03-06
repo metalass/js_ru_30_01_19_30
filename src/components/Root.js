@@ -23,6 +23,7 @@ class Root extends Component {
         return {
             user: this.state.user,
 	        lang: this.state.lang,
+		//ок, только вынеси словари в отдельный файл
 	        msg: this.state.lang == 'ru' ?
 		        {
 			        'DELETE_ME': 'Удалить',
